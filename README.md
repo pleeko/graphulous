@@ -1,2 +1,2 @@
 # graphulous
-a library for working with graphs
+a library for working with graphs 🤙
