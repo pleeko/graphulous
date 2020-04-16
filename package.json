@@ -1,0 +1,23 @@
+{
+  "name": "graphulous",
+  "version": "0.0.1",
+  "description": "a library for working with graphs 🤙",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [ "**/test/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleeko/graphulous.git"
+  },
+  "author": "Peter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pleeko/graphulous/issues"
+  },
+  "homepage": "https://github.com/pleeko/graphulous#readme"
+}
