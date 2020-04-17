@@ -99,4 +99,33 @@ describe('Graph', () => {
 		expect(ret).toEqual([ '0', '1', '2', '3', '4' ]);
 	});
 
+	it('should convert json to a graph', () => {
+		let json = {
+			nodes: [
+				{name: 'a'},
+				{name: 'b'},
+				{name: 'c'},
+				{name: 'd'},
+			],
+			edges:[
+				{source: 'a', target: 'b'},
+				{source: 'b', target: 'c'},
+				{source: 'c', target: 'd'},
+				{source: 'd', target: 'a'},
+			]
+		}
+		
+		let graph = new Graph();
+		graph.fromJson(json);
+		expect(graph).toEqual({
+			matrix: [ 
+				[ undefined, 1, undefined, 1],
+				[ 1, undefined, 1], 
+				[ undefined, 1, undefined, 1],
+				[ 1, undefined, 1], 
+		 	],
+			pointers: { a: { key: 0 }, b: { key: 1 }, c: { key: 2 }, d: { key: 3 } }
+		});
+	});
+
 });

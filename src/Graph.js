@@ -3,6 +3,17 @@ function Graph() {
   this.matrix = [];
 }
 
+Graph.prototype.fromJson = function (data, nodes='nodes', source='source', 
+  target='target', name='name', edges='edges') {
+    data[nodes].forEach(node => {
+      this.addNode(node[name]);
+    });
+    
+    data[edges].forEach(edge => {
+      this.addEdge(edge[source], edge[target]);
+    });
+};
+
 Graph.prototype.addNode = function (node) {
   this.pointers[node] = {
     key: this.matrix.length,
@@ -46,6 +57,15 @@ Graph.prototype.dfs = function (node) {
   });
 };
 
+Graph.prototype.bfs = function (node) {
+  const key = this.pointers[node].key;
+  let acc = bfsUtil(this.matrix, key);
+  let keys = Object.keys(this.pointers);
+  return acc.map((a) => {
+    return keys[a];
+  });
+};
+
 function dfsUtil(matrix, key, visited, acc) {
   visited[key] = true;
   acc.push(key);
@@ -56,15 +76,6 @@ function dfsUtil(matrix, key, visited, acc) {
   }
   return acc;
 }
-
-Graph.prototype.bfs = function (node) {
-  const key = this.pointers[node].key;
-  let acc = bfsUtil(this.matrix, key);
-  let keys = Object.keys(this.pointers);
-  return acc.map((a) => {
-    return keys[a];
-  });
-};
 
 function bfsUtil(matrix, key) {
   let visited = [];
