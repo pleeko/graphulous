@@ -8,7 +8,10 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testMatch": [ "**/test/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)" ]
+    "testMatch": [
+      "**/test/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ]
   },
   "repository": {
     "type": "git",
@@ -19,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/pleeko/graphulous/issues"
   },
-  "homepage": "https://github.com/pleeko/graphulous#readme"
+  "homepage": "https://github.com/pleeko/graphulous#readme",
+  "devDependencies": {
+    "jest": "^25.3.0"
+  }
 }
