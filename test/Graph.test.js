@@ -81,4 +81,22 @@ describe('Graph', () => {
 		expect(ret).toEqual([ 'c', 'a', 'b', 'd' ]);
 	});
 
+	it('should complete BFS on graph', () => {
+		let g = new Graph(); 
+		g.addNode(0);
+		g.addNode(1);
+		g.addNode(2);
+		g.addNode(3);
+		g.addNode(4);
+		
+		g.addEdge(0, 3); 
+		g.addEdge(0, 1); 
+		g.addEdge(2, 0); 
+		g.addEdge(2, 1); 
+		g.addEdge(4, 2); 
+		
+		let ret = g.bfs(0);
+		expect(ret).toEqual([ '0', '1', '2', '3', '4' ]);
+	});
+
 });
