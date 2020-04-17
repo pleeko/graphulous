@@ -23,13 +23,13 @@ describe('Graph', () => {
 
 	it('should remove a node to the Graph', () => {
 		const graph = new Graph();
-		graph.addNode('a');
-		graph.addNode('b');
-		graph.removeNode('a');
+		graph.addNode(1);
+		graph.addNode(2);
+		graph.removeNode(1);
 
 		expect(graph).toEqual({
 			matrix: [[]],
-			pointers: {b: {key: 1}}
+			pointers: {2: {key: 1}}
 		});
 	});
 
@@ -64,5 +64,21 @@ describe('Graph', () => {
 			});
 	});
 
+	it('should complete DFS on graph', () => {
+		const graph = new Graph();
+		graph.addNode('a');
+		graph.addNode('b');
+		graph.addNode('c');
+		graph.addNode('d');
+		
+		graph.addEdge('a','b');
+		graph.addEdge('a','c');
+		graph.addEdge('b','c');
+		graph.addEdge('c','a');
+		graph.addEdge('c','d');
+		graph.addEdge('d','d');
+		const ret = graph.dfs('c');
+		expect(ret).toEqual([ 'c', 'a', 'b', 'd' ]);
+	});
 
 });
