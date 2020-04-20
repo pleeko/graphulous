@@ -3,14 +3,14 @@ function MultiGraph() {
   this.matrix = [];
 }
 
-MultiGraph.prototype.fromJson = function (data, nodes='nodes', source='source', 
-  target='target', name='name', edges='edges') {
-    data[nodes].forEach(node => {
+MultiGraph.prototype.fromJson = function (input, nodes='nodes', source='source', 
+  target='target', name='name', edges='edges', data='data') {
+    input[nodes].forEach(node => {
       this.addNode(node[name]);
     });
     
-    data[edges].forEach(edge => {
-      this.addEdge(edge[source], edge[target]);
+    input[edges].forEach(edge => {
+      this.addEdge(edge[source], edge[target], edge[data]);
     });
 };
 
