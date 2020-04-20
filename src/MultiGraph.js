@@ -35,9 +35,15 @@ MultiGraph.prototype.removeNode = function (node) {
 MultiGraph.prototype.addEdge = function (node1, node2, data) {
   const key1 = this.pointers[node1].key;
   const key2 = this.pointers[node2].key;
+  if(typeof  this.matrix[key1][key2] === 'undefined'){
+    this.matrix[key1][key2] =[];
+  }
+  if(typeof  this.matrix[key2][key1] === 'undefined'){
+    this.matrix[key2][key1] =[];
+  }
 
-  this.matrix[key1][key2] = [data];
-  this.matrix[key2][key1] = [data];
+  this.matrix[key1][key2].push(data);
+  this.matrix[key2][key1].push(data);
 };
 
 MultiGraph.prototype.removeEdge = function (node1, node2, data) {

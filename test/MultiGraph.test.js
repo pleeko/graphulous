@@ -50,16 +50,17 @@ describe('MultiGraph', () => {
     graph.addNode('a');
     graph.addNode('b');
     graph.addEdge('a', 'b', 7);
+    graph.addEdge('a', 'b', 7);
 
     expect(graph).toEqual({
-      matrix: [[undefined, [7]], [[7]]],
+      matrix: [[undefined, [7,7]], [[7,7]]],
       pointers: { a: { key: 0 }, b: { key: 1 } }
     });
 
     graph.removeEdge('a', 'b', 7);
 
     expect(graph).toEqual({
-      matrix: [[undefined, null], [null]],
+      matrix: [[undefined, [7]], [[7]]],
       pointers: { a: { key: 0 }, b: { key: 1 } }
     });
   });
@@ -99,33 +100,34 @@ describe('MultiGraph', () => {
   //   expect(ret).toEqual(['0', '1', '2', '3', '4']);
   // });
 
-  // it('should convert json to a graph', () => {
-  //   let json = {
-  //     nodes: [
-  //       { name: 'a' },
-  //       { name: 'b' },
-  //       { name: 'c' },
-  //       { name: 'd' },
-  //     ],
-  //     edges: [
-  //       { source: 'a', target: 'b' },
-  //       { source: 'b', target: 'c' },
-  //       { source: 'c', target: 'd' },
-  //       { source: 'd', target: 'a' },
-  //     ]
-  //   }
+  it('should convert json to a graph', () => {
+    let json = {
+      nodes: [
+        { name: 'a' },
+        { name: 'b' },
+        { name: 'c' },
+        { name: 'd' },
+      ],
+      edges: [
+        { source: 'a', target: 'b', data: { weight: 2 } },
+        { source: 'b', target: 'c', data: { weight: 6 } },
+        { source: 'c', target: 'd', data: { weight: 4 } },
+        { source: 'd', target: 'a', data: { weight: 78 }},
+        { source: 'd', target: 'a', data: { weight: 92 }},
+      ]
+    }
 
-  //   let graph = new MultiGraph();
-  //   graph.fromJson(json);
-  //   expect(graph).toEqual({
-  //     matrix: [
-  //       [undefined, 1, undefined, 1],
-  //       [1, undefined, 1],
-  //       [undefined, 1, undefined, 1],
-  //       [1, undefined, 1],
-  //     ],
-  //     pointers: { a: { key: 0 }, b: { key: 1 }, c: { key: 2 }, d: { key: 3 } }
-  //   });
-  // });
+    let graph = new MultiGraph();
+    graph.fromJson(json);
+
+    expect(graph).toEqual({
+      matrix: [
+        [undefined, [{ "weight": 2 }], undefined, [{ "weight": 78 },{ "weight": 92 }]],
+        [[{ "weight": 2 }], undefined, [{ "weight": 6 }]],
+        [undefined, [{ "weight": 6 }], undefined, [{ "weight": 4 }]],
+        [[{ "weight": 78 },{ "weight": 92 }], undefined, [{ "weight": 4 }]]],
+      pointers: { a: { key: 0 }, b: { key: 1 }, c: { key: 2 }, d: { key: 3 } }
+    });
+  });
 
 });
